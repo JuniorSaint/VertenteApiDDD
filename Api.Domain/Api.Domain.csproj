@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Dtos\" />
+    <None Remove="Interfaces\" />
+    <None Remove="Models\" />
+    <None Remove="AutoMapper.Extensions.Microsoft.DependencyInjection" />
+    <None Remove="System.IdentityModel.Tokens.Jwt" />
+    <None Remove="Entities\" />
+    <None Remove="Dtos\User\" />
+    <None Remove="Dtos\Client\" />
+    <None Remove="Dtos\Login\" />
+    <None Remove="Dtos\Product\" />
+    <None Remove="Interfaces\Repository\" />
+    <None Remove="Interfaces\Services\" />
+    <None Remove="Dtos\State\" />
+    <None Remove="Dtos\Phone\" />
+    <None Remove="Dtos\ImagePath\" />
+    <None Remove="Dtos\Address\" />
+    <None Remove="Dtos\ProductType\" />
+    <None Remove="Security\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dtos\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Models\" />
+    <Folder Include="Entities\" />
+    <Folder Include="Dtos\User\" />
+    <Folder Include="Dtos\Client\" />
+    <Folder Include="Dtos\Login\" />
+    <Folder Include="Dtos\Product\" />
+    <Folder Include="Interfaces\Repository\" />
+    <Folder Include="Interfaces\Services\" />
+    <Folder Include="Dtos\State\" />
+    <Folder Include="Dtos\Phone\" />
+    <Folder Include="Dtos\ImagePath\" />
+    <Folder Include="Dtos\Address\" />
+    <Folder Include="Dtos\ProductType\" />
+    <Folder Include="Security\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.12.2" />
+  </ItemGroup>
+</Project>

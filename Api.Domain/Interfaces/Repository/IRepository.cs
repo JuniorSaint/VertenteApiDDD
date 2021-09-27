@@ -2,6 +2,7 @@
 using Api.Domain.Entities;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Api.Domain.Pagination;
 
 namespace Api.Domain.Interfaces
 {

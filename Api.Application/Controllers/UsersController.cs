@@ -3,7 +3,6 @@ using System.Net;
 using System.Threading.Tasks;
 using Api.Domain.Dtos.User;
 using Api.Domain.Interfaces.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Application.Controllers
@@ -22,10 +21,6 @@ namespace Api.Application.Controllers
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             {
                 return Ok(await _service.GetAll());
@@ -38,16 +33,18 @@ namespace Api.Application.Controllers
 
         // [Authorize("Bearer")]
         [HttpGet]
-        [Route("{id}", Name = "GetWithId")]
+        [Route("{id:guid}", Name = "GetWithId")]
         public async Task<ActionResult> Get(Guid id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             {
+                var result = await _service.Get(id);
+                if (result == null)
+                {
+                    return NotFound($"Pesquisa não obteve êxito com Id: {id}");
+                }
                 return Ok(await _service.Get(id));
+
             }
             catch (ArgumentException e)
             {
@@ -60,10 +57,6 @@ namespace Api.Application.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] UserDtoCreate category)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             {
                 var result = await _service.Post(category);
@@ -84,10 +77,6 @@ namespace Api.Application.Controllers
         [HttpPut]
         public async Task<ActionResult> Put([FromBody] UserDtoUpdate user)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             {
                 var result = await _service.Put(user);
@@ -97,7 +86,7 @@ namespace Api.Application.Controllers
                 }
                 else
                 {
-                    return BadRequest();
+                    return BadRequest("Dados não foram atualizados");
                 }
             }
             catch (ArgumentException e)
@@ -107,15 +96,16 @@ namespace Api.Application.Controllers
         }
 
         //   [Authorize("Bearer")]
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:guid}")]
         public async Task<ActionResult> Delete(Guid id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             {
+                var result = await _service.Get(id);
+                if (result == null)
+                {
+                    return NotFound($"Deleção não obteve êxito com Id: {id}");
+                }
                 return Ok(await _service.Delete(id));
             }
             catch (ArgumentException ex)

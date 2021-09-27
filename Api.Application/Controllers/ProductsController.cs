@@ -19,19 +19,15 @@ namespace Api.Application.Controllers
 
         //  [Authorize("Bearer")]
         [HttpGet]
-        [Route("{id}", Name = "GetEntriesWithId")]
+        [Route("{id:guid}", Name = "GetEntriesWithId")]
         public async Task<ActionResult> Get(Guid id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             {
                 var result = await _service.Get(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return NotFound($"Pesquisa não obteve êxito com Id: {id}");
                 }
                 return Ok(await _service.Get(id));
             }
@@ -46,16 +42,12 @@ namespace Api.Application.Controllers
         [HttpPut]
         public async Task<ActionResult> Put([FromBody] ProductDtoUpdate entries)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             {
                 var result = await _service.Put(entries);
                 if (result == null)
                 {
-                    return BadRequest();
+                    return BadRequest("Dados não foram atualizados");
                 }
                 return Ok(result);
 
@@ -67,15 +59,16 @@ namespace Api.Application.Controllers
         }
 
         //     [Authorize("Bearer")]
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:guid}")]
         public async Task<ActionResult> Delete(Guid id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             {
+                var result = await _service.Get(id);
+                if (result == null)
+                {
+                    return NotFound($"Deleção não obteve êxito com Id: {id}");
+                }
                 return Ok(await _service.Delete(id));
             }
             catch (ArgumentException ex)
@@ -88,10 +81,6 @@ namespace Api.Application.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] ProductDtoCreate entries)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             {
                 var result = await _service.Post(entries);
@@ -115,16 +104,12 @@ namespace Api.Application.Controllers
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             {
                 var result = await _service.GetAll();
                 if (result == null)
                 {
-                    return NotFound();
+                    return NotFound("Nenhum dado foi encontrado");
                 }
                 return Ok(await _service.GetAll());
             }

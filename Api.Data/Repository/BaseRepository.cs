@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Api.Data.Context;
 using Api.Domain.Entities;
 using Api.Domain.Interfaces;
+using Api.Domain.MessageException;
+using Api.Domain.Pagination;
 using Microsoft.EntityFrameworkCore;
 
 namespace Api.Data.Repository
@@ -30,10 +32,10 @@ namespace Api.Data.Repository
                 await _context.SaveChangesAsync();
                 return true;
             }
-            catch (ArgumentException )
+            catch (ArgumentException)
             {
                 throw;
-            }           
+            }
         }
 
         public async Task<bool> ExistAsync(Guid id)
@@ -68,7 +70,7 @@ namespace Api.Data.Repository
             {
                 return await _dataset.SingleOrDefaultAsync(p => p.Id.Equals(id));
             }
-            catch (ArgumentException )
+            catch (ArgumentException)
             {
                 throw;
             }
@@ -80,7 +82,7 @@ namespace Api.Data.Repository
             {
                 return await _dataset.ToListAsync();
             }
-            catch (ArgumentException )
+            catch (ArgumentException)
             {
                 throw;
             }

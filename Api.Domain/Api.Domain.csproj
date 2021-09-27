@@ -23,6 +23,10 @@
     <None Remove="Dtos\Address\" />
     <None Remove="Dtos\ProductType\" />
     <None Remove="Security\" />
+    <None Remove="MessageException\" />
+    <None Remove="Pagination\" />
+    <None Remove="Microsoft.EntityFrameworkCore" />
+    <None Remove="Microsoft.AspNetCore" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Dtos\" />
@@ -41,9 +45,13 @@
     <Folder Include="Dtos\Address\" />
     <Folder Include="Dtos\ProductType\" />
     <Folder Include="Security\" />
+    <Folder Include="MessageException\" />
+    <Folder Include="Pagination\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.12.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
   </ItemGroup>
 </Project>

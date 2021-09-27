@@ -19,6 +19,7 @@ namespace Api.CrossCutting.Mappings
             CreateMap<UserModel, UserDto>().ReverseMap();
             CreateMap<UserModel, UserDtoCreate>().ReverseMap();
             CreateMap<UserModel, UserDtoUpdate>().ReverseMap();
+            CreateMap<UserModel, UserDtoCreateResult>().ReverseMap();
             #endregion
 
 
@@ -26,6 +27,7 @@ namespace Api.CrossCutting.Mappings
             CreateMap<ClientModel, ClientDto>().ReverseMap();
             CreateMap<ClientModel, ClientDtoCreate>().ReverseMap();
             CreateMap<ClientModel, ClientDtoUpdate>().ReverseMap();
+            CreateMap<ClientModel, ClientDtoUpdateResult>().ReverseMap();
             #endregion
 
             #region ImagePaht
@@ -44,6 +46,7 @@ namespace Api.CrossCutting.Mappings
             CreateMap<ProductModel, ProductModel>().ReverseMap();
             CreateMap<ProductModel, ProductDtoCreate>().ReverseMap();
             CreateMap<ProductModel, ProductDtoUpdate>().ReverseMap();
+            CreateMap<ProductModel, ProductUpdateDtoResult>().ReverseMap();
             #endregion
 
             #region Address

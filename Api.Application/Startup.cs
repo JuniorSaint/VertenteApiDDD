@@ -30,7 +30,8 @@ namespace Api.Application
         {
             // configuração do CORS
             services.AddCors(options => options.AddDefaultPolicy(builder =>
-                builder.AllowAnyOrigin()
+                builder
+                .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
             ));
@@ -38,6 +39,8 @@ namespace Api.Application
             // adiciona as configurações do crosscutting
             ConfigureService.ConfigureDependenciesService(services);
             ConfigureRepository.ConfigureDependenciesRepository(services);
+
+            // Configuração de segurança
             var signingConfigurations = new SigningConfigurations();
             services.AddSingleton(signingConfigurations);
 
@@ -78,7 +81,7 @@ namespace Api.Application
                 paramsValidation.IssuerSigningKey = signingConfigurations.Key;
                 paramsValidation.ValidAudience = tokenConfigurations.Audience;
                 paramsValidation.ValidIssuer = tokenConfigurations.Issuer;
-   
+
                 // Valida a assinatura de um token recebido
                 paramsValidation.ValidateIssuerSigningKey = true;
 
@@ -120,6 +123,9 @@ namespace Api.Application
                     context.Database.Migrate();
                 }
             }
+
+            // adiciona o middle de tratamento de erros
+            //app.ConfigureExceptionHandler();
 
             app.UseHttpsRedirection();
 

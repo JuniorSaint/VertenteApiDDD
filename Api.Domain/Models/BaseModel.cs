@@ -12,7 +12,7 @@ namespace Api.Domain.Models
         }
 
         private DateTime? _createdAt;
-        public DateTime? CreateAt
+        public DateTime? CreatedAt
         {
             get { return _createdAt; }
             set

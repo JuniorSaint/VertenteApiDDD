@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using Api.Domain.Dtos.Client;
 using Api.Domain.Interfaces.Services;
+using Api.Domain.MessageException;
+using Api.Domain.Pagination;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,19 +21,15 @@ namespace Api.Application.Controllers
 
         //[Authorize("Bearer")]
         [HttpGet]
-        [Route("{id}", Name = "GetClientWithId")]
+        [Route("{id:guid}", Name = "GetClientWithId")]
         public async Task<ActionResult> Get(Guid id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             {
                 var result = await _service.Get(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return NotFound($"Pesquisa não obteve êxito com Id: {id}");
                 }
                 return Ok(await _service.Get(id));
             }
@@ -45,16 +43,12 @@ namespace Api.Application.Controllers
         [HttpPut]
         public async Task<ActionResult> Put([FromBody] ClientDtoUpdate client)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
             try
             {
                 var result = await _service.Put(client);
                 if (result == null)
                 {
-                    return BadRequest();
+                    return BadRequest("Dados não foram atualizados");
                 }
                 return Ok(result);
             }
@@ -64,15 +58,16 @@ namespace Api.Application.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:guid}")]
         public async Task<ActionResult> Delete(Guid id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             {
+                var result = await _service.Get(id);
+                if (result == null)
+                {
+                    return NotFound($"Deleção não obteve êxito com Id: {id}");
+                }
                 return Ok(await _service.Delete(id));
             }
             catch (ArgumentException ex)
@@ -84,10 +79,6 @@ namespace Api.Application.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] ClientDtoCreate client)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             try
             {
                 var result = await _service.Post(client);
@@ -109,23 +100,22 @@ namespace Api.Application.Controllers
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
             try
             {
                 var result = await _service.GetAll();
                 if (result == null)
                 {
-                    return NotFound();
+                    return NotFound("Nenhum dado foi encontrado");
                 }
                 return Ok(await _service.GetAll());
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return StatusCode((int)System.Net.HttpStatusCode.InternalServerError, ex.Message);
+                throw new MessageException("Erro ao conectar com o banco de dados");
+                //return StatusCode((int)System.Net.HttpStatusCode.InternalServerError, ex.Message);
             }
         }
+
+
     }
 }

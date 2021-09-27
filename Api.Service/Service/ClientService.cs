@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Api.Domain.Dtos.Client;
 using Api.Domain.Entities;
 using Api.Domain.Interfaces;
 using Api.Domain.Interfaces.Services;
 using Api.Domain.Models;
+using Api.Domain.Pagination;
 using AutoMapper;
 
 namespace Api.Service.Service
@@ -29,14 +31,22 @@ namespace Api.Service.Service
         public async Task<ClientDto> Get(Guid id)
         {
             var entity = await _repository.SelectAsync(id);
-            return  _mapper.Map<ClientDto>(entity);
+            return _mapper.Map<ClientDto>(entity);
         }
 
         public async Task<IEnumerable<ClientDto>> GetAll()
         {
             var entity = await _repository.SelectAsync();
-            return _mapper.Map<IEnumerable< ClientDto>>(entity);
+            return _mapper.Map<IEnumerable<ClientDto>>(entity);
         }
+
+        //public async Task<PagedList<ClientDto>> GetAllPagination(PaginationQueryModel paginationQueryModel)
+        //{
+        //    var entity = _repository.SelectAsync();
+        //    //var result = _mapper.Map<PagedList<ClientDto>>(entity);
+        //    return await PagedList<ClientDto>.ToPagedList(_mapper.Map<PagedList<ClientDto>>(entity).OrderBy(x => x.Name), paginationQueryModel.PageNumber, paginationQueryModel.PageSize);
+
+        //}
 
         public async Task<ClientDto> Post(ClientDtoCreate client)
         {

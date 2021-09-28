@@ -15,9 +15,9 @@ namespace Api.CrossCutting.Mappings
         public EntityToDtoProfile()
         {
             #region User Dto
-            CreateMap<UserDto, AddressEntity>().ReverseMap();
-            CreateMap<UserDtoCreate, AddressEntity>().ReverseMap();
-            CreateMap<UserDtoUpdate, AddressEntity>().ReverseMap();
+            CreateMap<UserDto, UserEntity>().ReverseMap();
+            CreateMap<UserDtoCreate, UserEntity>().ReverseMap();
+            CreateMap<UserDtoUpdate, UserEntity>().ReverseMap();
             #endregion
 
             #region Address Dto

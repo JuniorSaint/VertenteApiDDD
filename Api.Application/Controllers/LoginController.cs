@@ -23,10 +23,6 @@ namespace Api.Application.Controllers
         [HttpPost]
         public async Task<object> Login([FromBody] LoginDto loginDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);//400 bad request - solicitação inválida
-            }
             try
             {
                 var result = await _service.FindByLogin(loginDto);
@@ -36,7 +32,7 @@ namespace Api.Application.Controllers
                 }
                 else
                 {
-                    return NotFound();
+                    return NotFound($"Senha ou email {loginDto.Email} não encontrado");
                 }
             }
             catch (ArgumentException e)

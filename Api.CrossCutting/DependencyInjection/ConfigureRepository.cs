@@ -14,7 +14,7 @@ namespace Api.CrossCutting.DependencyInjection
 
         private static string Host = "localhost";
         private static string User = "Junior";
-        private static string DBname = "ControleFinanceiro";
+        private static string DBname = "Vertente";
         private static string Password = "123456";
         private static string Port = "5432";
 

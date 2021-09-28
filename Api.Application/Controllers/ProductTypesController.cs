@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Api.Domain.Dtos.Product;
+using Api.Domain.Dtos.ProductType;
 using Api.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,10 +8,10 @@ namespace Api.Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class ProductTypesController : ControllerBase
     {
-        private IProductService _service { get; set; }
-        public ProductsController(IProductService service)
+        private IProductTypeService _service { get; set; }
+        public ProductTypesController(IProductTypeService service)
         {
             _service = service;
         }
@@ -19,7 +19,7 @@ namespace Api.Application.Controllers
 
         //  [Authorize("Bearer")]
         [HttpGet]
-        [Route("{id:guid}", Name = "GetProductWithId")]
+        [Route("{id:guid}", Name = "GetProductTypeWithId")]
         public async Task<ActionResult> Get(Guid id)
         {
             try
@@ -40,7 +40,7 @@ namespace Api.Application.Controllers
 
         //    [Authorize("Bearer")]
         [HttpPut]
-        public async Task<ActionResult> Put([FromBody] ProductDtoUpdate entries)
+        public async Task<ActionResult> Put([FromBody] ProductTypeUpdateDto entries)
         {
             try
             {
@@ -79,14 +79,14 @@ namespace Api.Application.Controllers
 
         //     [Authorize("Bearer")]
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] ProductDtoCreate entries)
+        public async Task<ActionResult> Post([FromBody] ProductTypeCreateDto entries)
         {
             try
             {
                 var result = await _service.Post(entries);
                 if (result != null)
                 {
-                    return Created(new Uri(Url.Link("GetProductWithId", new { id = result.Id })), result);
+                    return Created(new Uri(Url.Link("GetProductTypeWithId", new { id = result.Id })), result);
                 }
                 else
                 {

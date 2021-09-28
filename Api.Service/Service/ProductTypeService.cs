@@ -1,57 +1,51 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Api.Domain.Dtos.ProductType;
-using Api.Domain.Entities;
-using Api.Domain.Interfaces;
+using Api.Domain.Interfaces.Repositories;
 using Api.Domain.Interfaces.Services;
-using Api.Domain.Models;
 using AutoMapper;
 
 namespace Api.Service.Services
 {
     public class ProductTypeService : IProductTypeService
     {
-        private IRepository<ProductTypeEntity> _repository;
+        private IProductTypeRepository _repository;
         private readonly IMapper _mapper;
 
-        public ProductTypeService(IRepository<ProductTypeEntity> repository, IMapper mapper)
+        public ProductTypeService(IProductTypeRepository repository,
+            IMapper mapper
+            )
         {
             _repository = repository;
             _mapper = mapper;
         }
 
-        public async Task<bool> Delete(Guid id)
+        public Task<ProductTypeDto> Get(Guid id)
         {
-            return await _repository.DeleteAsync(id);
-        }
-
-        public async Task<ProductTypeDto> Get(Guid id)
-        {
-            var result = await _repository.SelectAsync(id);
-            return _mapper.Map<ProductTypeDto>(result);
+            throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<ProductTypeDto>> GetAll()
         {
-            var result = await _repository.SelectAsync();
-            return _mapper.Map<IEnumerable<ProductTypeDto>>(result);
+            var listAll = await _repository.SelectAsync();
+            return _mapper.Map<IEnumerable<ProductTypeDto>>(listAll);
         }
 
-        public async Task<ProductTypeDto> Post(ProductTypeCreateDto product)
+        public Task<ProductTypeDto> Post(ProductTypeCreateDto product)
         {
-            var model = _mapper.Map<ProductTypeModel>(product);
-            var entity = _mapper.Map<ProductTypeEntity>(model);
-            var result = await _repository.InsertAsync(entity);
-            return _mapper.Map<ProductTypeDto>(result);
+            throw new NotImplementedException();
         }
 
-        public async Task<ProductTypeUpdateDtoResult> Put(ProductTypeUpdateDto product)
+        public Task<ProductTypeUpdateDtoResult> Put(ProductTypeUpdateDto product)
         {
-            var model = _mapper.Map<ProductTypeModel>(product);
-            var entity = _mapper.Map<ProductTypeEntity>(model);
-            var result = await _repository.UpdateAsync(entity);
-            return _mapper.Map<ProductTypeUpdateDtoResult>(result);
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> Delete(Guid id)
+        {
+            return await _repository.DeleteAsync(id);
         }
     }
 }

@@ -7,6 +7,7 @@ using Api.Domain.Dtos.ImagePath;
 using Api.Domain.Dtos.Phone;
 using Api.Domain.Dtos.Product;
 using Api.Domain.Dtos.State;
+using Api.Domain.Dtos.ProductType;
 
 namespace Api.CrossCutting.Mappings
 {
@@ -44,16 +45,25 @@ namespace Api.CrossCutting.Mappings
             CreateMap<PhoneDto, PhoneEntity>().ReverseMap();
             CreateMap<PhoneDtoCreate, PhoneEntity>().ReverseMap();
             CreateMap<PhoneDtoUpdate, PhoneEntity>().ReverseMap();
+            CreateMap<PhoneUpdateDtoResult, PhoneEntity>().ReverseMap();
             #endregion
 
             #region Product
             CreateMap<ProductDto, ProductEntity>().ReverseMap();
             CreateMap<ProductDtoCreate, ProductEntity>().ReverseMap();
             CreateMap<ProductDtoUpdate, ProductEntity>().ReverseMap();
+            CreateMap<ProductUpdateDtoResult, ProductEntity>().ReverseMap();
             #endregion
 
             #region State
             CreateMap<StateDto, StatesEntity>();
+            #endregion
+
+            #region Producttype
+            CreateMap<ProductTypeDto, ProductTypeEntity>().ReverseMap();
+            CreateMap<ProductTypeCreateDto, ProductTypeEntity>().ReverseMap();
+            CreateMap<ProductTypeUpdateDto, ProductTypeEntity>().ReverseMap();
+            CreateMap<ProductTypeUpdateDtoResult, ProductTypeEntity>().ReverseMap();
             #endregion
         }
     }

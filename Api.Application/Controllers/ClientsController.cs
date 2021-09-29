@@ -3,8 +3,6 @@ using System.Threading.Tasks;
 using Api.Domain.Dtos.Client;
 using Api.Domain.Interfaces.Services;
 using Api.Domain.MessageException;
-using Api.Domain.Pagination;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Application.Controllers
@@ -39,7 +37,7 @@ namespace Api.Application.Controllers
             }
         }
 
-        [Authorize("Bearer")]
+        //[Authorize("Bearer")]
         [HttpPut]
         public async Task<ActionResult> Put([FromBody] ClientDtoUpdate client)
         {

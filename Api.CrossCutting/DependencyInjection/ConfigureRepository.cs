@@ -6,6 +6,7 @@ using Api.Domain.Interfaces;
 using Api.Domain.Interfaces.Repositories;
 using Api.Data.Implementations;
 using Api.Domain.Interfaces.Repository;
+using Api.Data.Implementation;
 
 namespace Api.CrossCutting.DependencyInjection
 {
@@ -28,7 +29,8 @@ namespace Api.CrossCutting.DependencyInjection
             serviceCollection.AddScoped<IStateRepository, StateImplementation>();
             serviceCollection.AddScoped<IProductRepository, ProductImplementation>();
             serviceCollection.AddScoped<IPhoneRepository, PhoneImplementations>();
-
+            serviceCollection.AddScoped<IImagePathRepository, ImagePathImplementation>();
+            serviceCollection.AddScoped<IProductTypeRepository, ProductTypeImplementation>();
 
             serviceCollection.AddDbContext<MyContext>(
                  options => options.UseNpgsql($"Server={Host}; Port={Port}; Database={DBname}; Uid={User}; Pwd={Password}")

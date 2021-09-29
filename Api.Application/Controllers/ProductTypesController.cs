@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Api.Domain.Dtos.ProductType;
 using Api.Domain.Interfaces.Services;
-using Microsoft.AspNetCore.Mvc;
+
 
 namespace Api.Application.Controllers
 {
@@ -90,7 +91,7 @@ namespace Api.Application.Controllers
                 }
                 else
                 {
-                    return BadRequest();
+                    return BadRequest("Erro no envio do corpo do Post");
                 }
             }
             catch (ArgumentException ex)

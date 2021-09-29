@@ -11,9 +11,13 @@ namespace Api.CrossCutting.DependencyInjection
         public static void ConfigureDependenciesService(IServiceCollection serviceCollection)
         {
             serviceCollection.AddTransient<IUserService, UserService>();
-            serviceCollection.AddTransient<ILoginService, LoginService> ();
+            serviceCollection.AddTransient<ILoginService, LoginService>();
             serviceCollection.AddTransient<IClientService, ClientService>();
             serviceCollection.AddTransient<IProductService, ProductsService>();
+            serviceCollection.AddTransient<IProductTypeService, ProductTypeService>();
+            serviceCollection.AddTransient<IStateService, StateService>();
+            serviceCollection.AddTransient<IPhoneService, PhoneService>();
+            serviceCollection.AddTransient<IImagePathService, ImagePathService>();
         }
     }
 }

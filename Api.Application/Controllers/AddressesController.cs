@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Api.Domain.Dtos.Product;
+using Api.Domain.Dtos.Address;
+using Api.Domain.Dtos.Client;
 using Api.Domain.Interfaces.Services;
-
+using Api.Domain.MessageException;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class AddressesController : ControllerBase
     {
-        private IProductService _service { get; set; }
-        public ProductsController(IProductService service)
+        private IAddressService _service { get; set; }
+        public AddressesController(IAddressService service)
         {
             _service = service;
         }
 
-
-        //  [Authorize("Bearer")]
+        //[Authorize("Bearer")]
         [HttpGet]
-        [Route("{id:guid}", Name = "GetProductWithId")]
+        [Route("{id:guid}", Name = "GetAddressWithId")]
         public async Task<ActionResult> Get(Guid id)
         {
             try
@@ -38,28 +38,25 @@ namespace Api.Application.Controllers
             }
         }
 
-
-        //    [Authorize("Bearer")]
+        //[Authorize("Bearer")]
         [HttpPut]
-        public async Task<ActionResult> Put([FromBody] ProductDtoUpdate entries)
+        public async Task<ActionResult> Put([FromBody] AddressDtoUpdate client)
         {
             try
             {
-                var result = await _service.Put(entries);
+                var result = await _service.Put(client);
                 if (result == null)
                 {
                     return BadRequest("Dados não foram atualizados");
                 }
                 return Ok(result);
-
             }
-            catch (ArgumentException ex)
+            catch (Exception ex)
             {
                 return StatusCode((int)System.Net.HttpStatusCode.InternalServerError, ex.Message);
             }
         }
 
-        //     [Authorize("Bearer")]
         [HttpDelete("{id:guid}")]
         public async Task<ActionResult> Delete(Guid id)
         {
@@ -78,30 +75,27 @@ namespace Api.Application.Controllers
             }
         }
 
-        //     [Authorize("Bearer")]
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] ProductDtoCreate entries)
+        public async Task<ActionResult> Post([FromBody] AddressDtoCreate client)
         {
             try
             {
-                var result = await _service.Post(entries);
+                var result = await _service.Post(client);
                 if (result != null)
                 {
-                    return Created(new Uri(Url.Link("GetProductWithId", new { id = result.Id })), result);
+                    return Created(new Uri(Url.Link("GetAddressWithId", new { id = result.Id })), result);
                 }
                 else
                 {
                     return BadRequest();
                 }
             }
-            catch (ArgumentException ex)
+            catch (Exception ex)
             {
                 return StatusCode((int)System.Net.HttpStatusCode.InternalServerError, ex.Message);
             }
         }
 
-
-        //    [Authorize("Bearer")]
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
@@ -114,11 +108,13 @@ namespace Api.Application.Controllers
                 }
                 return Ok(await _service.GetAll());
             }
-            catch (ArgumentException ex)
+            catch (Exception)
             {
-                return StatusCode((int)System.Net.HttpStatusCode.InternalServerError, ex.Message);
+                throw new MessageException("Erro ao conectar com o banco de dados");
+                //return StatusCode((int)System.Net.HttpStatusCode.InternalServerError, ex.Message);
             }
         }
+
 
     }
 }

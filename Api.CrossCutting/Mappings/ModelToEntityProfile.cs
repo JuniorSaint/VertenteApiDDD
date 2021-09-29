@@ -15,6 +15,7 @@ namespace Api.CrossCutting.Mappings
             CreateMap<ProductEntity, ProductModel>().ReverseMap();
             CreateMap<StatesEntity, StateModel>().ReverseMap();
             CreateMap<UserEntity, UserModel>().ReverseMap();
+            CreateMap<ProductTypeEntity, ProductTypeModel>().ReverseMap(); ;
         }
     }
 }

@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Api.Domain.Dtos.Client;
 using Api.Domain.Entities;
-using Api.Domain.Interfaces;
+using Api.Domain.Interfaces.Repository;
 using Api.Domain.Interfaces.Services;
 using Api.Domain.Models;
-using Api.Domain.Pagination;
 using AutoMapper;
 
 namespace Api.Service.Service
 {
     public class ClientService : IClientService
     {
-        private IRepository<ClientEntity> _repository;
+        private IClientRepository _repository;
         private IMapper _mapper;
 
-        public ClientService(IRepository<ClientEntity> repository, IMapper mapper)
+        public ClientService(IClientRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;

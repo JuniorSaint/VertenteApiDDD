@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Api.Domain.Dtos.ProductType;
+using Api.Domain.Entities;
 using Api.Domain.Interfaces.Repositories;
 using Api.Domain.Interfaces.Services;
+using Api.Domain.Models;
 using AutoMapper;
 
 namespace Api.Service.Services
@@ -22,9 +24,10 @@ namespace Api.Service.Services
             _mapper = mapper;
         }
 
-        public Task<ProductTypeDto> Get(Guid id)
+        public async Task<ProductTypeDto> Get(Guid id)
         {
-            throw new NotImplementedException();
+            var entity = await _repository.SelectAsync(id);
+            return _mapper.Map<ProductTypeDto>(entity);
         }
 
         public async Task<IEnumerable<ProductTypeDto>> GetAll()
@@ -33,14 +36,22 @@ namespace Api.Service.Services
             return _mapper.Map<IEnumerable<ProductTypeDto>>(listAll);
         }
 
-        public Task<ProductTypeDto> Post(ProductTypeCreateDto product)
+        public async Task<ProductTypeDto> Post(ProductTypeCreateDto product)
         {
-            throw new NotImplementedException();
+            var model = _mapper.Map<ProductTypeModel>(product);
+            var entity = _mapper.Map<ProductTypeEntity>(model);
+            var result = await _repository.InsertAsync(entity);
+
+            return _mapper.Map<ProductTypeDto>(result);
         }
 
-        public Task<ProductTypeUpdateDtoResult> Put(ProductTypeUpdateDto product)
+        public async Task<ProductTypeUpdateDtoResult> Put(ProductTypeUpdateDto product)
         {
-            throw new NotImplementedException();
+            var model = _mapper.Map<ProductTypeModel>(product);
+            var entity = _mapper.Map<ProductTypeEntity>(model);
+            var result = await _repository.InsertAsync(entity);
+
+            return _mapper.Map<ProductTypeUpdateDtoResult>(result);
         }
 
         public async Task<bool> Delete(Guid id)

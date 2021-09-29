@@ -7,7 +7,7 @@ namespace Api.Domain.Interfaces.Services
 {
     public interface IStateService
     {
-        Task<StateDto> Get(Guid id);
+
         Task<IEnumerable<StateDto>> GetAll();
     }
 }

@@ -7,7 +7,7 @@ using Api.Domain.Entities;
 namespace Api.Domain.Dtos.Product
 {
     public class ProductDtoCreate
-    {       
+    {
 
         [Required(ErrorMessage = "Codigo do Produto é Obrigatório")]
         public string ProductCode { get; set; }
@@ -27,8 +27,7 @@ namespace Api.Domain.Dtos.Product
         [Required(ErrorMessage = "Informação se produto esta em promoção é Obrigatório")]
         public bool IsOnSale { get; set; }
 
-        [Required(ErrorMessage = "Tipo do Produto é Obrigatório")]
-        public string ProductType { get; set; }
+
 
         [Required(ErrorMessage = "Informar se Produto esta ativo é Obrigatório")]
         public bool IsActive { get; set; }
@@ -38,7 +37,8 @@ namespace Api.Domain.Dtos.Product
 
         public IEnumerable<ImagePathDto> ImagePaths { get; set; }
 
-        [Required(ErrorMessage = "Id do tipo de produto é campo obrigatório")]
-        public Guid ProductTypeId { get; set; }  
+        [Required(ErrorMessage = "Tipo do Produto é Obrigatório")]
+        public string ProductType { get; set; }
+        public Guid ProductTypeId { get; set; }
     }
 }

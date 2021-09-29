@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Api.Domain.Dtos.Phone;
 using Api.Domain.Entities;
 using Api.Domain.Interfaces;
+using Api.Domain.Interfaces.Repository;
 using Api.Domain.Interfaces.Services;
 using Api.Domain.Models;
 using AutoMapper;
@@ -12,9 +13,9 @@ namespace Api.Service.Services
 {
     public class PhoneService : IPhoneService
     {
-        private IRepository<PhoneEntity> _repository;
+        private IPhoneRepository _repository;
         private readonly IMapper _mapper;
-        public PhoneService(IRepository<PhoneEntity> repository, IMapper mapper)
+        public PhoneService(IPhoneRepository repository, IMapper mapper)
         {
             _mapper = mapper;
             _repository = repository;
@@ -48,9 +49,9 @@ namespace Api.Service.Services
             return _mapper.Map<PhoneUpdateDtoResult>(result);
         }
 
-        public async Task<bool> Delete( Guid id)
+        public async Task<bool> Delete(Guid id)
         {
             return await _repository.DeleteAsync(id);
-        }    
+        }
     }
 }

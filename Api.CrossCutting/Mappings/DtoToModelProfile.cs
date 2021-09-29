@@ -1,9 +1,10 @@
-﻿using System;
-using Api.Domain.Dtos.Address;
+﻿using Api.Domain.Dtos.Address;
 using Api.Domain.Dtos.Client;
 using Api.Domain.Dtos.ImagePath;
 using Api.Domain.Dtos.Phone;
 using Api.Domain.Dtos.Product;
+using Api.Domain.Dtos.ProductType;
+using Api.Domain.Dtos.State;
 using Api.Domain.Dtos.User;
 using Api.Domain.Models;
 using AutoMapper;
@@ -30,7 +31,7 @@ namespace Api.CrossCutting.Mappings
             CreateMap<ClientModel, ClientDtoUpdateResult>().ReverseMap();
             #endregion
 
-            #region ImagePaht
+            #region ImagePath
             CreateMap<ImagePathModel, ImagePathDto>().ReverseMap();
             CreateMap<ImagePathModel, ImagePathDtoCreate>().ReverseMap();
             CreateMap<ImagePathModel, ImagePathDtoUpdate>().ReverseMap();
@@ -40,6 +41,7 @@ namespace Api.CrossCutting.Mappings
             CreateMap<PhoneModel, PhoneDto>().ReverseMap();
             CreateMap<PhoneModel, PhoneDtoCreate>().ReverseMap();
             CreateMap<PhoneModel, PhoneDtoUpdate>().ReverseMap();
+            CreateMap<PhoneModel, PhoneUpdateDtoResult>().ReverseMap();
             #endregion
 
             #region Product
@@ -53,6 +55,17 @@ namespace Api.CrossCutting.Mappings
             CreateMap<AddressModel, AddressDto>().ReverseMap();
             CreateMap<AddressModel, AddressDtoCreate>().ReverseMap();
             CreateMap<AddressModel, AddressDtoUpdate>().ReverseMap();
+            #endregion
+
+            #region ProductType
+            CreateMap<ProductTypeModel, ProductTypeDto>().ReverseMap();
+            CreateMap<ProductTypeModel, ProductTypeCreateDto>().ReverseMap();
+            CreateMap<ProductTypeModel, ProductTypeUpdateDto>().ReverseMap();
+            CreateMap<ProductTypeModel, ProductTypeUpdateDtoResult>().ReverseMap();
+            #endregion
+
+            #region State
+            CreateMap<StateModel, StateDto>().ReverseMap();
             #endregion
 
         }

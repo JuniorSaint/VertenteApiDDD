@@ -5,11 +5,13 @@ namespace Api.Domain.Entities
 {
     public class AddressEntity : BaseEntity
     {
-        [Required]
-        [MaxLength(100, ErrorMessage = "Quantidade máxima de caracteres {1}")]
+        [Display(Name = "Rua"),
+         Required(ErrorMessage = "O campo {0} é obrigatório"),
+        MaxLength(100, ErrorMessage = "Quantidade máxima de caracteres {1}, no campo {0}")]
         public string Street { get; set; }
 
-        [Required(ErrorMessage = "Tipo de endereço é campo obrigatório")]
+        [Display(Name = "Tipo de endereço"),
+         Required(ErrorMessage = "{0} é campo obrigatório")]
         public string AddressType { get; set; }
 
         private string _number;
@@ -19,24 +21,29 @@ namespace Api.Domain.Entities
             set { _number = (value.Equals(null) ? "S/N" : value); }
         }
 
-        [Required(ErrorMessage = "Bairro de endereço é campo obrigatório")]
+        [Display(Name = "Bairro"),
+         Required(ErrorMessage = "{0} de endereço é campo obrigatório")]
         public string District { get; set; }
 
-        
+
         public string Complement { get; set; }
 
-        [Required]
-        [MaxLength(90, ErrorMessage = "Quantidade máxima de caracteres {1}")]
+        [Display(Name = "Cidade"),
+         Required(ErrorMessage = "Campo {0} é obrigatório"),
+         MaxLength(90, ErrorMessage = "Quantidade máxima de caracteres {1}")]
         public string City { get; set; }
 
-        [Required]
-        [MaxLength(8, ErrorMessage = "Quantidade máxima de caracteres {1}")]
+        [Display(Name = "CEP"),
+         Required(ErrorMessage = "{0} é campo obrigatório"),
+         MaxLength(8, ErrorMessage = "Quantidade máxima de caracteres {1}")]
         public int ZipCode { get; set; }
 
-        [Required]
+        [Display(Name = "Estado"),
+            Required(ErrorMessage = "{0} é campo obrigatório")]
         public string State { get; set; }
 
-        [Required]
+        [Display(Name = "Id do cliente"),
+         Required(ErrorMessage = "{0} é campo obrigatório")]
         public Guid ClientId { get; set; }
         public ClientEntity Client { get; set; }
     }

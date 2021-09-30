@@ -1,23 +1,30 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Api.Domain.Entities;
 
 namespace Api.Domain.Dtos.Phone
 {
     public class PhoneDtoUpdate
     {
-        [Required(ErrorMessage = "Id é campo obrigatório")]
-        public Guid Id { get; set; }
-
-        [Required(ErrorMessage = "Tipo de Telefone é campo obrigatório")]
+        [Display(Name = "Tipo de telefone"),
+            Required(ErrorMessage = "Campo {0} é obrigatório")]
         public string PhoneType { get; set; }
 
-        [Required(ErrorMessage = "Número de Telefone é campo obrigatório")]
+        [Display(Name = "Número de telefone"),
+         Required(ErrorMessage = "O campo {0} é obrigatório"),
+         Phone(ErrorMessage = "O campo {0} formato errado")]
         public int PhoneNumber { get; set; }
 
-        [Required(ErrorMessage = "Tem rede social de Telefone é campo obrigatório")]
-        public string SocialPhone { get; set; }
+        private string _socialPhone;
+        public string SocialPhone
+        {
+            get { return _socialPhone; }
+            set { _socialPhone = (value.Equals(null) ? "Não tem" : value); }
+        }
 
-        [Required(ErrorMessage = "Id do cliente é campo obrigatório")]
+        [Display(Name = "Id do cliente"),
+         Required(ErrorMessage = "O campo {0} é obrigatório")]
         public Guid ClientId { get; set; }
+        public ClientEntity Client { get; set; }
     }
 }

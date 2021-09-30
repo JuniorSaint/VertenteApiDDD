@@ -7,39 +7,50 @@ namespace Api.Domain.Dtos.Product
 {
     public class ProductDtoUpdate
     {
-        [Required(ErrorMessage = "Campo Id é obrigatório")]
+        [Display(Name = "Id do Produto"),
+         Required(ErrorMessage = "Campo {0} é obrigatório")]
         public Guid Id { get; set; }
 
-        [Required(ErrorMessage = "Codigo do Produto é Obrigatório")]
+        [Display(Name = "Código do produto"),
+         Required(ErrorMessage = "O campo {0} é Obrigatório")]
         public string ProductCode { get; set; }
 
-        [Required(ErrorMessage = "Nome do Produto é Obrigatório")]
-        [MaxLength(90, ErrorMessage = "Quantidade máxima de caracteres {1}")]
+        [Display(Name = "Nome do produto"),
+         Required(ErrorMessage = "O campo {0} é Obrigatório"),
+         MaxLength(90, ErrorMessage = "Quantidade máxima de caracteres {1}")]
         public string ProductName { get; set; }
 
-        [Required(ErrorMessage = "Descrição do Produto é Obrigatório")]
+        [Display(Name = "Descrição do produto"),
+         Required(ErrorMessage = "O campo {0} é Obrigatório")]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "Preço do Produto é Obrigatório")]
+        [Display(Name = "Preço do produto"),
+         Required(ErrorMessage = "O campo {0} é Obrigatório")]
         public double Price { get; set; }
 
-        public double PriceOff { get; set; }
+        private double _priceOff { get; set; }
+        public double PriceOff
+        {
+            get { return _priceOff; }
+            set { _priceOff = (value.Equals(null) ? 0.0 : value); }
+        }
 
-        [Required(ErrorMessage = "Informação se produto esta em promoção é Obrigatório")]
+        [Display(Name = "Esta na promoção"),
+         Required(ErrorMessage = "O campo {0} é Obrigatório")]
         public bool IsOnSale { get; set; }
 
-        [Required(ErrorMessage = "Tipo do Produto é Obrigatório")]
-        public string ProductType { get; set; }
-
-        [Required(ErrorMessage = "Informar se Produto esta ativo é Obrigatório")]
+        [Display(Name = "Produto ativo"),
+         Required(ErrorMessage = "O campo {0} é Obrigatório")]
         public bool IsActive { get; set; }
 
-        [Required(ErrorMessage = "Marca do Produto é Obrigatório")]
+        [Display(Name = "Marca do produto"),
+         Required(ErrorMessage = "O campo {0} é Obrigatório")]
         public string Brand { get; set; }
 
         public IEnumerable<ImagePathDto> ImagePaths { get; set; }
 
-        [Required(ErrorMessage = "Id do tipo de produto é campo obrigatório")]
+        [Display(Name = "Id tipo do produto"),
+            Required(ErrorMessage = "O campo {0} é obrigatório")]
         public Guid ProductTypeId { get; set; }
     }
 }

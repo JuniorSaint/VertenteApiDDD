@@ -1,14 +1,18 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Api.Domain.Entities;
 
 namespace Api.Domain.Dtos.ImagePath
 {
     public class ImagePathDtoCreate
     {
-        [Required(ErrorMessage = "Caminho da Imagem é Campo obrigatório")]
+        [Display(Name = "Caminho do produto"),
+         Required(ErrorMessage = "o campo {0} é Obrigatório")]
         public string ImagePath { get; set; }
 
-        [Required(ErrorMessage = "Id do produto é campo obrigatório")]
+        [Display(Name = "Id do produto"),
+            Required(ErrorMessage = "O campo {0} é obrigatório")]
         public Guid ProductId { get; set; }
+        public ProductEntity Product { get; set; }
     }
 }

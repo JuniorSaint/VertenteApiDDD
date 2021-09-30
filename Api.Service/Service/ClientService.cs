@@ -28,7 +28,7 @@ namespace Api.Service.Service
 
         public async Task<ClientDto> Get(Guid id)
         {
-            var entity = await _repository.SelectAsync(id);
+            var entity = await _repository.SelectAsyncComplete(id);
             return _mapper.Map<ClientDto>(entity);
         }
 

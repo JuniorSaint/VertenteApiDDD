@@ -52,8 +52,12 @@ namespace Api.Application
                 cfg.AddProfile(new ModelToEntityProfile());
             });
 
-            // ------
-            services.AddControllers();
+            // ------ Serviço de controller padrão
+            // Newtonsoft resolve o problema de loop de Id em Objeto dentro de outro objeto
+            services.AddControllers()
+                .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling =
+                                        Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
 
 
             // Configuração do Mapeamento

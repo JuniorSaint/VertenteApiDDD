@@ -36,18 +36,18 @@ namespace Api.Service.Services
             return _mapper.Map<IEnumerable<ProductTypeDto>>(listAll);
         }
 
-        public async Task<ProductTypeDto> Post(ProductTypeCreateDto product)
+        public async Task<ProductTypeDto> Post(ProductTypeCreateDto pt)
         {
-            var model = _mapper.Map<ProductTypeModel>(product);
+            var model = _mapper.Map<ProductTypeModel>(pt);
             var entity = _mapper.Map<ProductTypeEntity>(model);
             var result = await _repository.InsertAsync(entity);
 
             return _mapper.Map<ProductTypeDto>(result);
         }
 
-        public async Task<ProductTypeUpdateDtoResult> Put(ProductTypeUpdateDto product)
+        public async Task<ProductTypeUpdateDtoResult> Put(ProductTypeUpdateDto pt)
         {
-            var model = _mapper.Map<ProductTypeModel>(product);
+            var model = _mapper.Map<ProductTypeModel>(pt);
             var entity = _mapper.Map<ProductTypeEntity>(model);
             var result = await _repository.InsertAsync(entity);
 

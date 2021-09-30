@@ -42,17 +42,17 @@ namespace Api.Service.Service
             return _mapper.Map<IEnumerable<ImagePathDto>>(listAll);
         }
 
-        public async Task<ImagePathDto> Post(ImagePathDtoCreate product)
+        public async Task<ImagePathDto> Post(ImagePathDtoCreate ip)
         {
-            var model = _mapper.Map<ImagePathModel>(product);
+            var model = _mapper.Map<ImagePathModel>(ip);
             var entity = _mapper.Map<ImagePathEntity>(model);
             var result = await _repository.InsertAsync(entity);
             return _mapper.Map<ImagePathDto>(result);
         }
 
-        public async Task<ImagePathDto> Put(ImagePathDtoUpdate product)
+        public async Task<ImagePathDto> Put(ImagePathDtoUpdate ip)
         {
-            var model = _mapper.Map<ImagePathModel>(product);
+            var model = _mapper.Map<ImagePathModel>(ip);
             var entity = _mapper.Map<ImagePathEntity>(model);
             var result = await _repository.UpdateAsync(entity);
             return _mapper.Map<ImagePathDto>(result);

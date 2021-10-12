@@ -17,6 +17,8 @@
     <None Remove="Seed\" />
     <None Remove="Repository\" />
     <None Remove="Implementations\" />
+    <None Remove="Resources\" />
+    <None Remove="Resources\Image\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.10" />
@@ -36,5 +38,7 @@
     <Folder Include="Seed\" />
     <Folder Include="Repository\" />
     <Folder Include="Implementations\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Resources\Image\" />
   </ItemGroup>
 </Project>
